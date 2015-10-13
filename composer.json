@@ -1,0 +1,10 @@
+{
+    "name": "on2media/imgix-adapter",
+    "description": "imgix adapter",
+    "license": "GPL-2.0",
+    "require": {
+        "imgix/imgix-php": "^1.0",
+        "vlucas/phpdotenv": "^2.0"
+        
+    }
+}
