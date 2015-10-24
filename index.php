@@ -5,7 +5,7 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-$baseUri = $_ENV['BASE_URI'];
+$baseUri = getenv('BASE_URI');
 $regexp = '/^([cr])([0-9]+)x([0-9]+)\/((?:.+)\.(?:jpg|png|gif))$/';
 
 $uri = $_SERVER['REQUEST_URI'];
@@ -33,8 +33,8 @@ if ($matches[3] != 0) {
 $params['trim'] = 'color';
 $params['fit'] = ($matches[1] == 'r' ? 'clip' : 'crop');
 
-$builder = new \Imgix\UrlBuilder($_ENV['IMGIX_DOMAIN']);
-$builder->setSignKey($_ENV['IMGIX_SIGN_KEY']);
+$builder = new \Imgix\UrlBuilder(getenv('IMGIX_DOMAIN'));
+$builder->setSignKey(getenv('IMGIX_SIGN_KEY'));
 $url = $builder->createURL($matches[4], $params);
 
 header($_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently');
