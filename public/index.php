@@ -1,9 +1,11 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = new Dotenv\Dotenv(__DIR__);
-$dotenv->load();
+if (!getenv('BASE_URI')) {
+    $dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+    $dotenv->load();
+}
 
 $baseUri = getenv('BASE_URI');
 $regexp = '/^([cr])([0-9]+)x([0-9]+)\/((?:.+)\.(?:jpg|png|gif))$/';
