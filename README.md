@@ -2,20 +2,27 @@
 
 Adapter from home-grown image manipulation to [imgix](https://www.imgix.com/).
 
-The script responds to requests to legacy URLs and redirects them to an imgix URL.
+The script responds to requests to legacy URLs, generates an imgix URL to process the image then
+caches the retrieved image locally.
 
 ## Example
 
 A request to:
 
 ```
-http://imgix-adapter.example/path/to/script/c100x50/uploaded-images/myimage.jpg
+http://imgix-adapter.example/path/to/script/public/c100x50/uploaded-images/myimage.jpg
 ```
 
-Redirects to:
+Retrieves an image from:
 
 ```
 http://imgix-domain.imgix.net/uploaded-images/myimage.jpg?fit=crop&w=100&h=50
+```
+
+And caches the image locally at:
+
+```
+/path/to/script/public/c100x50/uploaded-images/myimage.jpg
 ```
 
 Where:

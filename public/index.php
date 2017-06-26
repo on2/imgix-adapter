@@ -46,7 +46,17 @@ if (!is_dir($dir)) {
     mkdir($dir, 0777, true);
 }
 
-$image = file_get_contents($url);
+if ($ch = curl_init()) {
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $image = curl_exec($ch);
+    if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200) {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+        exit;
+    }
+    curl_close($ch);
+}
+
 $length = file_put_contents($target, $image);
 
 switch (pathinfo($target, PATHINFO_EXTENSION)) {
